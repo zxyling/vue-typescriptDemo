@@ -1,25 +1,8 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-
-    <div class="box">
-        <div class="content">1312312</div>
+    <div class="box" ref="boxs">
+        <div class="content">{{msg}}</div>
     </div>
   </div>
 </template>
@@ -28,9 +11,29 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 
-@Component
+
+@Component({
+  props: {
+    msg: String
+  },
+  watch: {
+        msg: {
+            handler: function() {
+                console.log('更新')
+            }
+        }
+    }
+})
 export default class Hello extends Vue {
-  msg: string = 'this is a typescript project now'    
+    msg: String
+    mounted() {
+        this.init();
+        console.log(this.$refs.boxs);
+    }
+
+    init() {
+        console.log(1);
+    }
 }
 </script>
 
